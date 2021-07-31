@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:news_today/views/home.dart';
+import 'package:news_app_api/views/homepage.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.black,
       ),
-      home: NewsHome(),
+      home: Home(),
     );
   }
 }
