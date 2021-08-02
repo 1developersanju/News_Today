@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_api/helper/data.dart';
 import 'package:news_app_api/helper/news.dart';
 import 'package:news_app_api/helper/widgets.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:tiktoklikescroller/tiktoklikescroller.dart';
+import 'package:news_app_api/models/categorie_model.dart';
 
 class CategoryNews extends StatefulWidget {
   final String newsCategory;
@@ -66,25 +69,28 @@ class _CategoryNewsState extends State<CategoryNews> {
           : SingleChildScrollView(
               child: Container(
                 child: Container(
-                  margin: EdgeInsets.only(top: 16),
-                  child: ListView.builder(
-                      itemCount: newslist.length,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Card(
-                          color: Colors.cyan.shade300,
-                          child: NewsTile(
-                            imgUrl: newslist[index].urlToImage ?? "",
-                            title: newslist[index].title ?? "",
-                            desc: newslist[index].description ?? "",
-                            
-                            content: newslist[index].content ?? "",
-                            posturl: newslist[index].articleUrl ?? "",
-                            
-                          ).p8(),
-                        ).p2();
-                      }),
+                  margin: EdgeInsets.only(top: 50),
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 1.2,
+                      child: TikTokStyleFullPageScroller(
+                          animationDuration: const Duration(milliseconds: 400),
+                          swipePositionThreshold: 0.500,
+                          contentSize: newslist.length,
+                          builder: (context, index) {
+                            return Card(
+                              color: Colors.cyan.shade300,
+                              child: NewsTile(
+                                imgUrl: newslist[index].urlToImage ?? "",
+                                title: newslist[index].title ?? "",
+                                desc: newslist[index].description ?? "",
+                                content: newslist[index].content ?? "",
+                                posturl: newslist[index].articleUrl ?? "",
+                              ).p8(),
+                            ).p2();
+                          }),
+                    ),
+                  ),
                 ),
               ),
             ),

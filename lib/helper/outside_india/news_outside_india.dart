@@ -9,7 +9,7 @@ class NewsForCategory_outside_india {
 
   Future<void> getNewsForCategory(String category) async {
     String url =
-        "http://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=${apiKey}";
+        "http://newsapi.org/v2/top-headlines?country=us&everything?q=tesla&domains=twitter&sortBy=publishedAt&popularity&language=en&category=$category&apiKey=${apiKey}";
 
     var response = await http.get(url);
 

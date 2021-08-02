@@ -40,11 +40,11 @@ class NewsTile extends StatelessWidget {
                     )));
       },
       child: Container(
-          margin: EdgeInsets.only(top: 20, bottom: 24),
+          margin: EdgeInsets.only(top: 10, bottom: 24),
           width: MediaQuery.of(context).size.width,
           child: Container(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 5),
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -54,6 +54,24 @@ class NewsTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            print("share article");
+                          },
+                          child: Container(
+                            width: 60,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                              image: AssetImage("assets/share.png"),
+                            )),
+                          ),
+                        )).p16(),
+                  ),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute<void>(
@@ -87,7 +105,7 @@ class NewsTile extends StatelessWidget {
                             child: PinchZoomImage(
                               image: Image.network(
                                 imgUrl,
-                                height: MediaQuery.of(context).size.width / 1.5,
+                                height: MediaQuery.of(context).size.height / 3,
                                 width: MediaQuery.of(context).size.width,
                                 fit: BoxFit.fill,
                               ),
@@ -102,7 +120,7 @@ class NewsTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(6),
                         child: Image.network(
                           imgUrl,
-                          height: MediaQuery.of(context).size.height / 2.5,
+                          height: MediaQuery.of(context).size.height / 2.2,
                           width: MediaQuery.of(context).size.width,
                           fit: BoxFit.fill,
                         )),
@@ -123,7 +141,7 @@ class NewsTile extends StatelessWidget {
                   ),
                   Text(
                     desc,
-                    maxLines: 3,
+                    maxLines: 2,
                     style: TextStyle(color: Colors.black54, fontSize: 14),
                   ),
                   SizedBox(

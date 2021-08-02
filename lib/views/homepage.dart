@@ -8,6 +8,7 @@ import 'package:news_app_api/views/categoryView.dart';
 import '../helper/news.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+import 'package:tiktoklikescroller/tiktoklikescroller.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -83,26 +84,35 @@ class _HomeState extends State<Home> {
                             Container(
                               margin: EdgeInsets.only(top: 16),
                               color: Colors.black,
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: newslist.length,
-                                  physics: BouncingScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return Card(
-                                      color: Colors.cyan.shade300,
-                                      child: NewsTile(
-                                        imgUrl:
-                                            newslist[index].urlToImage ?? "",
-                                        title: newslist[index].title ?? "",
-                                        desc:
-                                            newslist[index].description ?? "",
-                                        content:
-                                            newslist[index].content ?? "",
-                                        posturl:
-                                            newslist[index].articleUrl ?? "",
-                                      ).p8(),
-                                    ).p2();
-                                  }),
+                              child: SingleChildScrollView(
+                                child: SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.3,
+                                  child: TikTokStyleFullPageScroller(
+                                      animationDuration:
+                                          const Duration(milliseconds: 400),
+                                      swipePositionThreshold: 0.500,
+                                      contentSize: newslist.length,
+                                      builder: (context, index) {
+                                        return Card(
+                                          color: Colors.cyan.shade300,
+                                          child: NewsTile(
+                                            imgUrl:
+                                                newslist[index].urlToImage ??
+                                                    "",
+                                            title: newslist[index].title ?? "",
+                                            desc: newslist[index].description ??
+                                                "",
+                                            content:
+                                                newslist[index].content ?? "",
+                                            posturl:
+                                                newslist[index].articleUrl ??
+                                                    "",
+                                          ).p8(),
+                                        ).p2();
+                                      }),
+                                ),
+                              ),
                             ),
                           ],
                         ),

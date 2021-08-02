@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app_api/helper/outside_india/news_outside_india.dart';
 import 'package:news_app_api/helper/widgets.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:tiktoklikescroller/tiktoklikescroller.dart';
 
 class CategoryNews_outside_india extends StatefulWidget {
   final String newsCategory;
@@ -68,23 +69,28 @@ class _CategoryNews_outside_indiaState
           : SingleChildScrollView(
               child: Container(
                 child: Container(
-                  margin: EdgeInsets.only(top: 16),
-                  child: ListView.builder(
-                      itemCount: newslist.length,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Card(
-                          color: Colors.cyan.shade300,
-                          child: NewsTile(
-                            imgUrl: newslist[index].urlToImage ?? "",
-                            title: newslist[index].title ?? "",
-                            desc: newslist[index].description ?? "",
-                            content: newslist[index].content ?? "",
-                            posturl: newslist[index].articleUrl ?? "",
-                          ).p8(),
-                        ).p2();
-                      }),
+                  margin: EdgeInsets.only(top: 50),
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 1.2,
+                      child: TikTokStyleFullPageScroller(
+                          swipePositionThreshold: 0.500,
+                          animationDuration: const Duration(milliseconds: 400),
+                          contentSize: newslist.length,
+                          builder: (context, index) {
+                            return Card(
+                              color: Colors.cyan.shade300,
+                              child: NewsTile(
+                                imgUrl: newslist[index].urlToImage ?? "",
+                                title: newslist[index].title ?? "",
+                                desc: newslist[index].description ?? "",
+                                content: newslist[index].content ?? "",
+                                posturl: newslist[index].articleUrl ?? "",
+                              ).p8(),
+                            ).p2();
+                          }),
+                    ),
+                  ),
                 ),
               ),
             ),
