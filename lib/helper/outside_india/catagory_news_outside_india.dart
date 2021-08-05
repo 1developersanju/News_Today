@@ -48,10 +48,17 @@ class _CategoryNews_outside_indiaState
         actions: <Widget>[
           // opacity: 0,
           Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(
-                Icons.list,
-                color: Colors.black,
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: GestureDetector(
+                onTap: () {
+                  // getNews();
+                },
+                child: Icon(
+                  Icons.list,
+                  color: Colors.black,
+                ),
               )),
         ],
         backgroundColor: Colors.black,
@@ -72,9 +79,8 @@ class _CategoryNews_outside_indiaState
                   margin: EdgeInsets.only(top: 50),
                   child: SingleChildScrollView(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.2,
+                      height: MediaQuery.of(context).size.height / 1.3,
                       child: TikTokStyleFullPageScroller(
-                          swipePositionThreshold: 0.500,
                           animationDuration: const Duration(milliseconds: 400),
                           contentSize: newslist.length,
                           builder: (context, index) {

@@ -16,10 +16,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool viewVisible = true;
   bool _loading;
   var newslist;
 
   List<CategorieModel> categories = [];
+
+  void hideWidget() {
+    setState(() {
+      viewVisible = false;
+    });
+  }
+
+  void showWidget() {
+    setState(() {
+      viewVisible = true;
+    });
+  }
 
   void getNews() async {
     News news = News();
@@ -66,7 +79,7 @@ class _HomeState extends State<Home> {
                             /// Categories
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 16),
-                              height: 70,
+                              height: MediaQuery.of(context).size.height / 18,
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: categories.length,
@@ -79,39 +92,61 @@ class _HomeState extends State<Home> {
                                     );
                                   }),
                             ),
+                            Container(
+                              child: GestureDetector(
+                                onTap: hideWidget,
+                                child: Visibility(
+                                  maintainSize: true,
+                                  maintainAnimation: true,
+                                  maintainState: true,
+                                  visible: viewVisible,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.label_important,
+                                        color: Colors.cyan.shade300,
+                                      ),
+                                      "Swipe right to get international news categories"
+                                          .text
+                                          .gray200
+                                          .makeCentered(),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
 
                             /// News Article
                             Container(
-                              margin: EdgeInsets.only(top: 16),
+                              // margin: EdgeInsets.only(
+                              //     top:
+                              //         MediaQuery.of(context).size.height / 100),
                               color: Colors.black,
-                              child: SingleChildScrollView(
-                                child: SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height / 1.3,
-                                  child: TikTokStyleFullPageScroller(
-                                      animationDuration:
-                                          const Duration(milliseconds: 400),
-                                      swipePositionThreshold: 0.500,
-                                      contentSize: newslist.length,
-                                      builder: (context, index) {
-                                        return Card(
-                                          color: Colors.cyan.shade300,
-                                          child: NewsTile(
-                                            imgUrl:
-                                                newslist[index].urlToImage ??
-                                                    "",
-                                            title: newslist[index].title ?? "",
-                                            desc: newslist[index].description ??
-                                                "",
-                                            content:
-                                                newslist[index].content ?? "",
-                                            posturl:
-                                                newslist[index].articleUrl ??
-                                                    "",
-                                          ).p8(),
-                                        ).p2();
-                                      }),
-                                ),
+                              child: SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height / 1.32,
+                                child: TikTokStyleFullPageScroller(
+                                    animationDuration:
+                                        const Duration(milliseconds: 400),
+                                    swipePositionThreshold: 0.300,
+                                    contentSize: newslist.length,
+                                    builder: (context, index) {
+                                      return Card(
+                                        color: Colors.cyan.shade300,
+                                        child: NewsTile(
+                                          imgUrl:
+                                              newslist[index].urlToImage ?? "",
+                                          title: newslist[index].title ?? "",
+                                          desc:
+                                              newslist[index].description ?? "",
+                                          content:
+                                              newslist[index].content ?? "",
+                                          posturl:
+                                              newslist[index].articleUrl ?? "",
+                                        ).p8(),
+                                      ).p2();
+                                    }),
                               ),
                             ),
                           ],
@@ -120,11 +155,11 @@ class _HomeState extends State<Home> {
                     ),
             ),
           ),
-          ////category page
+
+          ///category page
           CategoryList()
         ],
         scrollDirection: Axis.horizontal,
-        pageSnapping: false,
       ),
     );
   }

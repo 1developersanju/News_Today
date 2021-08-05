@@ -40,7 +40,9 @@ class NewsTile extends StatelessWidget {
                     )));
       },
       child: Container(
-          margin: EdgeInsets.only(top: 10, bottom: 24),
+          margin: EdgeInsets.only(
+            top: 10,
+          ),
           width: MediaQuery.of(context).size.width,
           child: Container(
             child: Container(
@@ -54,26 +56,9 @@ class NewsTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            print("share article");
-                          },
-                          child: Container(
-                            width: 60,
-                            height: 30,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                              image: AssetImage("assets/share.png"),
-                            )),
-                          ),
-                        )).p16(),
-                  ),
                   GestureDetector(
                     onTap: () {
+                      print(imgUrl);
                       Navigator.of(context).push(MaterialPageRoute<void>(
                           builder: (BuildContext context) {
                         return Scaffold(
@@ -116,24 +101,32 @@ class NewsTile extends StatelessWidget {
                         );
                       }));
                     },
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(6),
-                        child: Image.network(
-                          imgUrl,
-                          height: MediaQuery.of(context).size.height / 2.2,
-                          width: MediaQuery.of(context).size.width,
-                          fit: BoxFit.fill,
-                        )),
+                    child: Container(
+                      color: Colors.transparent,
+                      height: MediaQuery.of(context).size.height / 2,
+                      width: MediaQuery.of(context).size.width,
+                      child: Card(
+                        color: Colors.transparent,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: Image.network(
+                              imgUrl,
+                              height: MediaQuery.of(context).size.height / 2.2,
+                              width: MediaQuery.of(context).size.width,
+                              fit: BoxFit.fill,
+                            )),
+                      ),
+                    ),
                   ),
                   SizedBox(
-                    height: 12,
+                    height: 10,
                   ),
                   Text(
                     title,
                     maxLines: 2,
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: MediaQuery.of(context).size.height / 40,
                         fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
@@ -141,19 +134,95 @@ class NewsTile extends StatelessWidget {
                   ),
                   Text(
                     desc,
-                    maxLines: 2,
+                    maxLines: 3,
                     style: TextStyle(color: Colors.black54, fontSize: 14),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      "News".text.size(10).makeCentered(),
-                      "Today".text.size(15).yellow400.makeCentered(),
-                    ],
-                  ),
+                  Spacer(),
+                  Column(children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        "News".text.size(10).makeCentered(),
+                        "Today".text.size(15).yellow400.makeCentered(),
+                      ],
+                    ),
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width,
+                      child: HStack([
+                        Align(
+                            alignment: Alignment.bottomRight,
+                            child: GestureDetector(
+                              onTap: () {
+                                print("like article");
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 3,
+                                child: Card(
+                                  shadowColor: Colors.black,
+                                  child: Row(children: <Widget>[
+                                    Icon(
+                                      Icons.thumb_up_alt,
+                                      color: Colors.cyan.shade300,
+                                      size: MediaQuery.of(context).size.width /
+                                          17,
+                                    ).centered().p2(),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    //icon
+                                    // Image.asset("assets/share.png",
+                                    //         color: Colors.cyan.shade300)
+                                    //     .p2(),
+                                    Text("like",
+                                        style: TextStyle(
+                                          color: Colors.cyan.shade300,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              20,
+                                        )).p4()
+                                  ]),
+                                ),
+                              ),
+                            )),
+                        Spacer(),
+                        Align(
+                            alignment: Alignment.bottomLeft,
+                            child: GestureDetector(
+                              onTap: () {
+                                print("share article");
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 3,
+
+                                child: Card(
+                                  shadowColor: Colors.black,
+                                  child: Row(children: <Widget>[
+                                    Image.asset("assets/share.png",
+                                            color: Colors.cyan.shade300)
+                                        .p2(),
+                                    Text("share",
+                                        style: TextStyle(
+                                          color: Colors.cyan.shade300,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              20,
+                                        )).p4()
+                                  ]),
+                                ),
+                                // decoration: BoxDecoration(
+                                //     image: DecorationImage(
+                                //   image: AssetImage("assets/share.png"),
+                                // )),
+                              ),
+                            )),
+                      ]),
+                    ),
+                  ]),
                 ],
               ),
             ),

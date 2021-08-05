@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:news_app_api/models/article.dart';
 import 'dart:convert';
-
 import 'package:news_app_api/api_key.dart';
 
 class NewsForCategory_outside_india {
