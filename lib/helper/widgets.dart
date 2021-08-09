@@ -30,6 +30,7 @@ class NewsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data = MediaQuery.of(context);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -41,12 +42,14 @@ class NewsTile extends StatelessWidget {
       },
       child: Container(
           margin: EdgeInsets.only(
-            top: 10,
+            top: data.size.width / 50,
           ),
-          width: MediaQuery.of(context).size.width,
+          width: data.size.width,
           child: Container(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 5),
+              padding: EdgeInsets.symmetric(
+                horizontal: data.size.width / 50,
+              ),
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -61,6 +64,7 @@ class NewsTile extends StatelessWidget {
                       print(imgUrl);
                       Navigator.of(context).push(MaterialPageRoute<void>(
                           builder: (BuildContext context) {
+                        final data = MediaQuery.of(context);
                         return Scaffold(
                           appBar: AppBar(
                             title: Row(
@@ -90,8 +94,8 @@ class NewsTile extends StatelessWidget {
                             child: PinchZoomImage(
                               image: Image.network(
                                 imgUrl,
-                                height: MediaQuery.of(context).size.height / 3,
-                                width: MediaQuery.of(context).size.width,
+                                height: data.size.height / 3,
+                                width: data.size.width,
                                 fit: BoxFit.fill,
                               ),
                               zoomedBackgroundColor: Colors.black,
@@ -103,41 +107,42 @@ class NewsTile extends StatelessWidget {
                     },
                     child: Container(
                       color: Colors.transparent,
-                      height: MediaQuery.of(context).size.height / 2,
-                      width: MediaQuery.of(context).size.width,
+                      height: data.size.height / 2.2,
+                      width: data.size.width,
                       child: Card(
                         color: Colors.transparent,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(6),
                             child: Image.network(
                               imgUrl,
-                              height: MediaQuery.of(context).size.height / 2.2,
-                              width: MediaQuery.of(context).size.width,
+                              height: data.size.height / 2.2,
+                              width: data.size.width,
                               fit: BoxFit.fill,
                             )),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: data.size.height / 360,
                   ),
                   Text(
                     title,
                     maxLines: 2,
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: MediaQuery.of(context).size.height / 40,
+                        fontSize: data.size.height / 40,
                         fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
-                    height: 4,
+                    height: data.size.height / 120,
                   ),
                   Text(
                     desc,
                     maxLines: 3,
-                    style: TextStyle(color: Colors.black54, fontSize: 14),
+                    style: TextStyle(
+                        color: Colors.black54, fontSize: data.size.height / 54),
                   ),
-                  Spacer(),
+                Spacer(),
                   Column(children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -147,8 +152,8 @@ class NewsTile extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width,
+                      height: data.size.height / 15,
+                      width: data.size.width,
                       child: HStack([
                         Align(
                             alignment: Alignment.bottomRight,
@@ -157,15 +162,14 @@ class NewsTile extends StatelessWidget {
                                 print("like article");
                               },
                               child: Container(
-                                width: MediaQuery.of(context).size.width / 3,
+                                width: data.size.width / 3,
                                 child: Card(
                                   shadowColor: Colors.black,
                                   child: Row(children: <Widget>[
                                     Icon(
                                       Icons.thumb_up_alt,
                                       color: Colors.cyan.shade300,
-                                      size: MediaQuery.of(context).size.width /
-                                          17,
+                                      size: data.size.width / 17,
                                     ).centered().p2(),
                                     SizedBox(
                                       width: 5,
@@ -178,10 +182,7 @@ class NewsTile extends StatelessWidget {
                                         style: TextStyle(
                                           color: Colors.cyan.shade300,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              20,
+                                          fontSize: data.size.width / 20,
                                         )).p4()
                                   ]),
                                 ),
@@ -195,7 +196,7 @@ class NewsTile extends StatelessWidget {
                                 print("share article");
                               },
                               child: Container(
-                                width: MediaQuery.of(context).size.width / 3,
+                                width: data.size.width / 3,
 
                                 child: Card(
                                   shadowColor: Colors.black,
@@ -207,10 +208,7 @@ class NewsTile extends StatelessWidget {
                                         style: TextStyle(
                                           color: Colors.cyan.shade300,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              20,
+                                          fontSize: data.size.width / 20,
                                         )).p4()
                                   ]),
                                 ),

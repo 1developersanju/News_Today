@@ -36,6 +36,7 @@ class _CategoryNews_outside_indiaState
 
   @override
   Widget build(BuildContext context) {
+    final data = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -79,7 +80,7 @@ class _CategoryNews_outside_indiaState
                   margin: EdgeInsets.only(top: 50),
                   child: SingleChildScrollView(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.3,
+                      height: data.size.height / 1.3,
                       child: TikTokStyleFullPageScroller(
                           animationDuration: const Duration(milliseconds: 400),
                           contentSize: newslist.length,

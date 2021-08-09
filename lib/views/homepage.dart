@@ -54,6 +54,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final data = MediaQuery.of(context);
     return Scaffold(
       appBar: MyAppBar(),
       backgroundColor: Colors.black,
@@ -79,7 +80,7 @@ class _HomeState extends State<Home> {
                             /// Categories
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 16),
-                              height: MediaQuery.of(context).size.height / 18,
+                              height: data.size.height / 18,
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: categories.length,
@@ -119,13 +120,13 @@ class _HomeState extends State<Home> {
 
                             /// News Article
                             Container(
+                              // height: data.size.height *.74,
                               // margin: EdgeInsets.only(
                               //     top:
                               //         MediaQuery.of(context).size.height / 100),
                               color: Colors.black,
                               child: SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 1.32,
+                                height: data.size.height / 1.24,
                                 child: TikTokStyleFullPageScroller(
                                     animationDuration:
                                         const Duration(milliseconds: 400),

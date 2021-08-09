@@ -16,6 +16,7 @@ class _ArticleViewState extends State<ArticleView> {
       Completer<WebViewController>();
   @override
   Widget build(BuildContext context) {
+    final data = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -25,7 +26,6 @@ class _ArticleViewState extends State<ArticleView> {
             "Today".text.size(25).yellow400.makeCentered(),
           ],
         ),
-
         actions: <Widget>[
           Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
@@ -38,8 +38,8 @@ class _ArticleViewState extends State<ArticleView> {
         elevation: 0.0,
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: data.size.height,
+        width: data.size.width,
         child: WebView(
           initialUrl: widget.postUrl,
           onWebViewCreated: (WebViewController webViewController) {

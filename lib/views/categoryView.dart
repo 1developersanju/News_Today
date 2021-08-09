@@ -27,6 +27,7 @@ class _CategoryListState extends State<CategoryList> {
 
   @override
   Widget build(BuildContext context) {
+    final data = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: DoubleBackToCloseApp(
@@ -59,7 +60,7 @@ class _CategoryListState extends State<CategoryList> {
                     ]),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 15),
-                      height: MediaQuery.of(context).size.height,
+                      height: data.size.height,
                       child: GridView.builder(
                           gridDelegate:
                               SliverGridDelegateWithMaxCrossAxisExtent(
@@ -94,6 +95,7 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data = MediaQuery.of(context);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -112,14 +114,14 @@ class CategoryCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: imageAssetUrl,
                 height: 200,
-                width: MediaQuery.of(context).size.width,
+                width: data.size.width,
                 fit: BoxFit.cover,
               ),
             ),
             Container(
               alignment: Alignment.center,
               height: 200,
-              width: MediaQuery.of(context).size.width,
+              width: data.size.width,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.black26),

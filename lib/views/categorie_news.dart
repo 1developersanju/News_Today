@@ -34,6 +34,7 @@ class _CategoryNewsState extends State<CategoryNews> {
 
   @override
   Widget build(BuildContext context) {
+    final data = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -70,7 +71,7 @@ class _CategoryNewsState extends State<CategoryNews> {
                   margin: EdgeInsets.only(top: 50),
                   child: SingleChildScrollView(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.2,
+                      height: data.size.height / 1.2,
                       child: TikTokStyleFullPageScroller(
                           animationDuration: const Duration(milliseconds: 400),
                           contentSize: newslist.length,
