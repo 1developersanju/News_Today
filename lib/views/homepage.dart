@@ -64,97 +64,72 @@ class _HomeState extends State<Home> {
             snackBar: const SnackBar(
               content: Text('Tap back again to leave'),
             ),
-            child: SafeArea(
-              child: _loading
-                  ? Center(
-                      child: Card(
-                        child: Container(
-                          child: CircularProgressIndicator().p12(),
-                        ),
-                      ),
-                    )
-                  : SingleChildScrollView(
+            child: _loading
+                ? Center(
+                    child: Card(
                       child: Container(
-                        child: Column(
-                          children: <Widget>[
-                            /// Categories
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              height: data.size.height / 18,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: categories.length,
-                                  itemBuilder: (context, index) {
-                                    return CategoryCard(
-                                      imageAssetUrl:
-                                          categories[index].imageAssetUrl,
-                                      categoryName:
-                                          categories[index].categorieName,
-                                    );
-                                  }),
-                            ),
-                            Container(
-                              child: GestureDetector(
-                                onTap: hideWidget,
-                                child: Visibility(
-                                  maintainSize: true,
-                                  maintainAnimation: true,
-                                  maintainState: true,
-                                  visible: viewVisible,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.label_important,
-                                        color: Colors.cyan.shade300,
-                                      ),
-                                      "Swipe right to get international news categories"
-                                          .text
-                                          .gray200
-                                          .makeCentered(),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            /// News Article
-                            Container(
-                              // height: data.size.height *.74,
-                              // margin: EdgeInsets.only(
-                              //     top:
-                              //         MediaQuery.of(context).size.height / 100),
-                              color: Colors.black,
-                              child: SizedBox(
-                                height: data.size.height / 1.24,
-                                child: TikTokStyleFullPageScroller(
-                                    animationDuration:
-                                        const Duration(milliseconds: 400),
-                                    swipePositionThreshold: 0.300,
-                                    contentSize: newslist.length,
-                                    builder: (context, index) {
-                                      return Card(
-                                        color: Colors.cyan.shade300,
-                                        child: NewsTile(
-                                          imgUrl:
-                                              newslist[index].urlToImage ?? "",
-                                          title: newslist[index].title ?? "",
-                                          desc:
-                                              newslist[index].description ?? "",
-                                          content:
-                                              newslist[index].content ?? "",
-                                          posturl:
-                                              newslist[index].articleUrl ?? "",
-                                        ).p8(),
-                                      ).p2();
-                                    }),
-                              ),
-                            ),
-                          ],
-                        ),
+                        child: CircularProgressIndicator().p12(),
                       ),
                     ),
-            ),
+                  )
+                : SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          /// Categories
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            height: data.size.height * .082,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: categories.length,
+                                itemBuilder: (context, index) {
+                                  return CategoryCard(
+                                    imageAssetUrl:
+                                        categories[index].imageAssetUrl,
+                                    categoryName:
+                                        categories[index].categorieName,
+                                  );
+                                }),
+                            // height: data.size.height / 15,
+                          ),
+
+                          /// News Article
+                          Container(
+                            height: data.size.height * .82,
+                            // margin: EdgeInsets.only(
+                            //     top:
+                            //         MediaQuery.of(context).size.height / 100),
+                            color: Colors.black,
+                            child: SizedBox(
+                              // height: data.size.height * .90,
+                              child: TikTokStyleFullPageScroller(
+                                  animationDuration:
+                                      const Duration(milliseconds: 400),
+                                  swipePositionThreshold: 0.300,
+                                  contentSize: newslist.length,
+                                  builder: (context, index) {
+                                    return Card(
+                                      color: Colors.cyan.shade300,
+                                      child: NewsTile(
+                                        imgUrl:
+                                            newslist[index].urlToImage ?? "",
+                                        title: newslist[index].title ?? "",
+                                        desc:
+                                            newslist[index].description ?? "",
+                                        content:
+                                            newslist[index].content ?? "",
+                                        posturl:
+                                            newslist[index].articleUrl ?? "",
+                                      ).p8(),
+                                    ).p2();
+                                  }),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
           ),
 
           ///category page
@@ -190,15 +165,13 @@ class CategoryCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               child: CachedNetworkImage(
                 imageUrl: imageAssetUrl,
-                height: 60,
-                width: 120,
+                width: MediaQuery.of(context).size.width * .4,
                 fit: BoxFit.cover,
               ),
             ),
             Container(
               alignment: Alignment.center,
-              height: 60,
-              width: 120,
+              width: MediaQuery.of(context).size.width * .4,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.black26),
@@ -207,7 +180,7 @@ class CategoryCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.yellow,
-                    fontSize: 14,
+                    fontSize: MediaQuery.of(context).size.width * .04,
                     fontWeight: FontWeight.w500),
               ),
             )

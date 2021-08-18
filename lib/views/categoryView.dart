@@ -51,12 +51,20 @@ class _CategoryListState extends State<CategoryList> {
                           "International"
                               .text
                               .yellow400
-                              .size(25)
+                              .size(data.size.height * .03)
                               .makeCentered(),
-                          "News".text.size(25).white.makeCentered(),
+                          "News"
+                              .text
+                              .size(data.size.height * .03)
+                              .white
+                              .makeCentered(),
                         ],
                       ),
-                      "Categories".text.size(15).white.makeCentered(),
+                      "Categories"
+                          .text
+                          .size(data.size.height * .02)
+                          .white
+                          .makeCentered(),
                     ]),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 15),

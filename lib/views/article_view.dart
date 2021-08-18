@@ -22,8 +22,8 @@ class _ArticleViewState extends State<ArticleView> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            "News".text.size(20).makeCentered(),
-            "Today".text.size(25).yellow400.makeCentered(),
+            "News".text.size(data.size.width * .05).makeCentered(),
+            "Today".text.size(data.size.width * .06).yellow400.makeCentered(),
           ],
         ),
         actions: <Widget>[

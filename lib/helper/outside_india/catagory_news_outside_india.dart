@@ -42,24 +42,17 @@ class _CategoryNews_outside_indiaState
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            "News".text.size(20).makeCentered(),
-            "Today".text.size(25).yellow400.makeCentered(),
+            "News".text.size(data.size.width * .05).makeCentered(),
+            "Today".text.size(data.size.width * .06).yellow400.makeCentered(),
           ],
         ),
         actions: <Widget>[
           // opacity: 0,
           Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              child: GestureDetector(
-                onTap: () {
-                  // getNews();
-                },
-                child: Icon(
-                  Icons.list,
-                  color: Colors.black,
-                ),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(
+                Icons.list,
+                color: Colors.black,
               )),
         ],
         backgroundColor: Colors.black,
@@ -80,7 +73,7 @@ class _CategoryNews_outside_indiaState
                   margin: EdgeInsets.only(top: 50),
                   child: SingleChildScrollView(
                     child: SizedBox(
-                      height: data.size.height / 1.3,
+                      height: data.size.height / 1.2,
                       child: TikTokStyleFullPageScroller(
                           animationDuration: const Duration(milliseconds: 400),
                           contentSize: newslist.length,

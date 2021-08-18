@@ -20,11 +20,11 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.12.0+4
-#  dio: ^4.0.0
   cached_network_image: ^2.0.0
   webview_flutter: ^0.3.19+9
   double_back_to_close_app: ^2.0.1
   tiktoklikescroller: ^0.1.6
+  share: ^2.0.4
   
 
   # The following adds the Cupertino Icons font to your application.
@@ -32,7 +32,6 @@ dependencies:
   cupertino_icons: ^0.1.2
   velocity_x: ^3.3.0
   pinch_zoom_image_last: ^0.3.2
-  share: ^2.0.4
   path_provider: ^2.0.2
   
 

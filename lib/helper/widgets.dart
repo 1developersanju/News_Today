@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:news_app_api/views/article_view.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
+// import 'package:share/share.dart';
+// import 'package:path_provider/path_provider.dart';
+// import 'package:http/http.dart';
 
 Widget MyAppBar() {
   return AppBar(
@@ -17,7 +20,7 @@ Widget MyAppBar() {
   );
 }
 
-class NewsTile extends StatelessWidget {
+class NewsTile extends StatefulWidget {
   final String imgUrl, title, desc, content, posturl, publishedAt;
 
   NewsTile(
@@ -29,6 +32,11 @@ class NewsTile extends StatelessWidget {
       @required this.posturl});
 
   @override
+  State<NewsTile> createState() => _NewsTileState();
+}
+
+class _NewsTileState extends State<NewsTile> {
+  @override
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return GestureDetector(
@@ -37,18 +45,18 @@ class NewsTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => ArticleView(
-                      postUrl: posturl,
+                      postUrl: widget.posturl,
                     )));
       },
       child: Container(
           margin: EdgeInsets.only(
-            top: data.size.width / 50,
+            top: data.size.width * .03,
           ),
           width: data.size.width,
           child: Container(
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: data.size.width / 50,
+                horizontal: data.size.width * .02,
               ),
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
@@ -61,7 +69,7 @@ class NewsTile extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
-                      print(imgUrl);
+                      print(widget.imgUrl);
                       Navigator.of(context).push(MaterialPageRoute<void>(
                           builder: (BuildContext context) {
                         final data = MediaQuery.of(context);
@@ -70,8 +78,15 @@ class NewsTile extends StatelessWidget {
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                "News".text.size(20).makeCentered(),
-                                "Today".text.size(25).yellow400.makeCentered(),
+                                "News"
+                                    .text
+                                    .size(data.size.width * .05)
+                                    .makeCentered(),
+                                "Today"
+                                    .text
+                                    .size(data.size.width * .06)
+                                    .yellow400
+                                    .makeCentered(),
                               ],
                             ),
                             actions: <Widget>[
@@ -93,8 +108,8 @@ class NewsTile extends StatelessWidget {
                             alignment: Alignment.center,
                             child: PinchZoomImage(
                               image: Image.network(
-                                imgUrl,
-                                height: data.size.height / 3,
+                                widget.imgUrl,
+                                height: data.size.height * .5,
                                 width: data.size.width,
                                 fit: BoxFit.fill,
                               ),
@@ -107,15 +122,15 @@ class NewsTile extends StatelessWidget {
                     },
                     child: Container(
                       color: Colors.transparent,
-                      height: data.size.height / 2.2,
+                      height: data.size.height * .5,
                       width: data.size.width,
                       child: Card(
                         color: Colors.transparent,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(6),
                             child: Image.network(
-                              imgUrl,
-                              height: data.size.height / 2.2,
+                              widget.imgUrl,
+                              height: data.size.height * .5,
                               width: data.size.width,
                               fit: BoxFit.fill,
                             )),
@@ -123,36 +138,42 @@ class NewsTile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: data.size.height / 360,
+                    height: data.size.height * .005,
                   ),
                   Text(
-                    title,
+                    widget.title,
                     maxLines: 2,
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: data.size.height / 40,
+                        fontSize: data.size.height * .030,
                         fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
-                    height: data.size.height / 120,
+                    height: data.size.height * .01,
                   ),
                   Text(
-                    desc,
+                    widget.desc,
                     maxLines: 3,
                     style: TextStyle(
-                        color: Colors.black54, fontSize: data.size.height / 54),
+                      color: Colors.black54,
+                      fontSize: data.size.height * .02,
+                    ),
                   ),
-                Spacer(),
+                  Spacer(),
                   Column(children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        "News".text.size(10).makeCentered(),
-                        "Today".text.size(15).yellow400.makeCentered(),
+                        "News".text.size(data.size.width * .02).makeCentered(),
+                        "Today"
+                            .text
+                            .size(data.size.width * .03)
+                            .yellow400
+                            .makeCentered(),
                       ],
                     ),
                     Container(
-                      height: data.size.height / 15,
+                      height: data.size.height * .07,
                       width: data.size.width,
                       child: HStack([
                         Align(
@@ -193,7 +214,7 @@ class NewsTile extends StatelessWidget {
                             alignment: Alignment.bottomLeft,
                             child: GestureDetector(
                               onTap: () {
-                                print("share article");
+                                // print("share article");
                               },
                               child: Container(
                                 width: data.size.width / 3,
