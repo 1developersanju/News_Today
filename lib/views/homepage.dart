@@ -56,88 +56,82 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
-      appBar: MyAppBar(),
-      backgroundColor: Colors.black,
-      body: PageView(
-        children: <Widget>[
-          DoubleBackToCloseApp(
-            snackBar: const SnackBar(
-              content: Text('Tap back again to leave'),
-            ),
-            child: _loading
-                ? Center(
-                    child: Card(
-                      child: Container(
-                        child: CircularProgressIndicator().p12(),
-                      ),
-                    ),
-                  )
-                : SingleChildScrollView(
+        appBar: MyAppBar(),
+        backgroundColor: Colors.black,
+        body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            content: Text('Tap back again to leave'),
+          ),
+          child: _loading
+              ? Center(
+                  child: Card(
                     child: Container(
-                      child: Column(
-                        children: <Widget>[
-                          /// Categories
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            height: data.size.height * .082,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: categories.length,
-                                itemBuilder: (context, index) {
-                                  return CategoryCard(
-                                    imageAssetUrl:
-                                        categories[index].imageAssetUrl,
-                                    categoryName:
-                                        categories[index].categorieName,
-                                  );
-                                }),
-                            // height: data.size.height / 15,
-                          ),
-
-                          /// News Article
-                          Container(
-                            height: data.size.height * .82,
-                            // margin: EdgeInsets.only(
-                            //     top:
-                            //         MediaQuery.of(context).size.height / 100),
-                            color: Colors.black,
-                            child: SizedBox(
-                              // height: data.size.height * .90,
-                              child: TikTokStyleFullPageScroller(
-                                  animationDuration:
-                                      const Duration(milliseconds: 400),
-                                  swipePositionThreshold: 0.300,
-                                  contentSize: newslist.length,
-                                  builder: (context, index) {
-                                    return Card(
-                                      color: Colors.cyan.shade300,
-                                      child: NewsTile(
-                                        imgUrl:
-                                            newslist[index].urlToImage ?? "",
-                                        title: newslist[index].title ?? "",
-                                        desc:
-                                            newslist[index].description ?? "",
-                                        content:
-                                            newslist[index].content ?? "",
-                                        posturl:
-                                            newslist[index].articleUrl ?? "",
-                                      ).p8(),
-                                    ).p2();
-                                  }),
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: CircularProgressIndicator().p12(),
                     ),
                   ),
-          ),
+                )
+              : SingleChildScrollView(
+                  child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        /// Categories
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          height: data.size.height * .082,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: categories.length,
+                              itemBuilder: (context, index) {
+                                return CategoryCard(
+                                  imageAssetUrl:
+                                      categories[index].imageAssetUrl,
+                                  categoryName: categories[index].categorieName,
+                                );
+                              }),
+                          // height: data.size.height / 15,
+                        ),
 
-          ///category page
-          CategoryList()
-        ],
-        scrollDirection: Axis.horizontal,
-      ),
-    );
+                        /// News Article
+                        Container(
+                          height: data.size.height * .80,
+                          margin: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * .012),
+                          color: Colors.black,
+                          child: SizedBox(
+                            child: TikTokStyleFullPageScroller(
+                                animationDuration:
+                                    const Duration(milliseconds: 400),
+                                swipePositionThreshold: 0.300,
+                                contentSize: newslist.length,
+                                builder: (context, index) {
+                                  return Card(
+                                    color: Colors.cyan.shade300,
+                                    child: NewsTile(
+                                      imgUrl: newslist[index].urlToImage ?? "",
+                                      title: newslist[index].title ?? "",
+                                      desc: newslist[index].description ?? "",
+                                      content: newslist[index].content ?? "",
+                                      posturl: newslist[index].articleUrl ?? "",
+                                    ).p8(),
+                                  ).p2();
+                                }),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+        ),
+
+        ///category page
+
+        drawer: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Drawer(
+            elevation: 500,
+            child: CategoryList(),
+          ),
+        ));
   }
 }
 

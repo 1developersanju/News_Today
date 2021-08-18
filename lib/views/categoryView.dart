@@ -67,15 +67,15 @@ class _CategoryListState extends State<CategoryList> {
                           .makeCentered(),
                     ]),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
+                      padding: EdgeInsets.only(top: 5,bottom: 80),
                       height: data.size.height,
                       child: GridView.builder(
                           gridDelegate:
                               SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 200,
-                                  childAspectRatio: 3 / 2,
-                                  crossAxisSpacing: 20,
-                                  mainAxisSpacing: 20),
+                                  maxCrossAxisExtent: 300,
+                                  childAspectRatio: 5 / 3,
+                                  crossAxisSpacing: 2,
+                                  mainAxisSpacing: 2),
                           addAutomaticKeepAlives: false,
                           itemCount: categories.length,
                           itemBuilder: (context, index) {
@@ -121,7 +121,7 @@ class CategoryCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               child: CachedNetworkImage(
                 imageUrl: imageAssetUrl,
-                height: 200,
+                height: data.size.height * .2,
                 width: data.size.width,
                 fit: BoxFit.cover,
               ),
@@ -138,7 +138,7 @@ class CategoryCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.yellow,
-                    fontSize: 20,
+                    fontSize: data.size.height * .02,
                     fontWeight: FontWeight.w500),
               ),
             ),

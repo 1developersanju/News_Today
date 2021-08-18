@@ -109,7 +109,7 @@ class _NewsTileState extends State<NewsTile> {
                             child: PinchZoomImage(
                               image: Image.network(
                                 widget.imgUrl,
-                                height: data.size.height * .5,
+                                // height: data.size.height * .45,
                                 width: data.size.width,
                                 fit: BoxFit.fill,
                               ),
@@ -122,7 +122,7 @@ class _NewsTileState extends State<NewsTile> {
                     },
                     child: Container(
                       color: Colors.transparent,
-                      height: data.size.height * .5,
+                      height: data.size.height * .45,
                       width: data.size.width,
                       child: Card(
                         color: Colors.transparent,
