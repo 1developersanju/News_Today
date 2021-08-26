@@ -67,7 +67,7 @@ class _CategoryListState extends State<CategoryList> {
                           .makeCentered(),
                     ]),
                     Container(
-                      padding: EdgeInsets.only(top: 5,bottom: 80),
+                      padding: EdgeInsets.only(top: 5, bottom: 80),
                       height: data.size.height,
                       child: GridView.builder(
                           gridDelegate:

@@ -49,15 +49,15 @@ class _NewsTileState extends State<NewsTile> {
                     )));
       },
       child: Container(
-          margin: EdgeInsets.only(
-            top: data.size.width * .03,
-          ),
+          // margin: EdgeInsets.only(
+          //   top: data.size.width * .03,
+          // ),
           width: data.size.width,
           child: Container(
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: data.size.width * .02,
-              ),
+              // padding: EdgeInsets.symmetric(
+              //   horizontal: data.size.width * .02,
+              // ),
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -102,14 +102,12 @@ class _NewsTileState extends State<NewsTile> {
                           ),
                           //backgroundColor: Colors.black,
                           body: Container(
-                            // The blue background emphasizes that it's a new route.
                             color: Colors.black,
-                            padding: const EdgeInsets.all(16.0),
                             alignment: Alignment.center,
                             child: PinchZoomImage(
                               image: Image.network(
                                 widget.imgUrl,
-                                // height: data.size.height * .45,
+                                height: data.size.height * .40,
                                 width: data.size.width,
                                 fit: BoxFit.fill,
                               ),
@@ -122,7 +120,7 @@ class _NewsTileState extends State<NewsTile> {
                     },
                     child: Container(
                       color: Colors.transparent,
-                      height: data.size.height * .45,
+                      height: data.size.height * .40,
                       width: data.size.width,
                       child: Card(
                         color: Colors.transparent,
@@ -130,7 +128,7 @@ class _NewsTileState extends State<NewsTile> {
                             borderRadius: BorderRadius.circular(6),
                             child: Image.network(
                               widget.imgUrl,
-                              height: data.size.height * .5,
+                              height: data.size.height * .40,
                               width: data.size.width,
                               fit: BoxFit.fill,
                             )),
@@ -138,27 +136,27 @@ class _NewsTileState extends State<NewsTile> {
                     ),
                   ),
                   SizedBox(
-                    height: data.size.height * .005,
+                    height: data.size.height * .01,
                   ),
                   Text(
                     widget.title,
-                    maxLines: 2,
+                    maxLines: 5,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: data.size.height * .030,
                         fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(
-                    height: data.size.height * .01,
-                  ),
-                  Text(
-                    widget.desc,
-                    maxLines: 3,
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: data.size.height * .02,
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: data.size.height * .01,
+                  // ),
+                  // Text(
+                  //   widget.desc,
+                  //   maxLines: 3,
+                  //   style: TextStyle(
+                  //     color: Colors.black54,
+                  //     fontSize: data.size.height * .02,
+                  //   ),
+                  // ),
                   Spacer(),
                   Column(children: <Widget>[
                     Row(

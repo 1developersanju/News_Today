@@ -58,50 +58,49 @@ class _HomeState extends State<Home> {
     return Scaffold(
         appBar: MyAppBar(),
         backgroundColor: Colors.black,
-        body: DoubleBackToCloseApp(
-          snackBar: const SnackBar(
-            content: Text('Tap back again to leave'),
-          ),
-          child: _loading
-              ? Center(
-                  child: Card(
-                    child: Container(
-                      child: CircularProgressIndicator().p12(),
+        body: SafeArea(
+          child: DoubleBackToCloseApp(
+            snackBar: const SnackBar(
+              content: Text('Tap back again to leave'),
+            ),
+            child: _loading
+                ? Center(
+                    child: Card(
+                      child: Container(
+                        child: CircularProgressIndicator().p12(),
+                      ),
                     ),
-                  ),
-                )
-              : SingleChildScrollView(
-                  child: Container(
-                    child: Column(
-                      children: <Widget>[
-                        /// Categories
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          height: data.size.height * .082,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: categories.length,
-                              itemBuilder: (context, index) {
-                                return CategoryCard(
-                                  imageAssetUrl:
-                                      categories[index].imageAssetUrl,
-                                  categoryName: categories[index].categorieName,
-                                );
-                              }),
-                          // height: data.size.height / 15,
-                        ),
+                  )
+                : SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          /// Categories
+                          Container(
+                            //padding: EdgeInsets.symmetric(horizontal: 16),
+                            height: data.size.height * .0813,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: categories.length,
+                                itemBuilder: (context, index) {
+                                  return CategoryCard(
+                                    imageAssetUrl:
+                                        categories[index].imageAssetUrl,
+                                    categoryName:
+                                        categories[index].categorieName,
+                                  );
+                                }),
+                            // height: data.size.height / 15,
+                          ),
 
-                        /// News Article
-                        Container(
-                          height: data.size.height * .80,
-                          margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * .012),
-                          color: Colors.black,
-                          child: SizedBox(
+                          /// News Article
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.75,
+                            width: MediaQuery.of(context).size.width,
+                            color: Colors.black,
                             child: TikTokStyleFullPageScroller(
                                 animationDuration:
-                                    const Duration(milliseconds: 400),
-                                swipePositionThreshold: 0.300,
+                                    const Duration(milliseconds: 200),
                                 contentSize: newslist.length,
                                 builder: (context, index) {
                                   return Card(
@@ -109,18 +108,18 @@ class _HomeState extends State<Home> {
                                     child: NewsTile(
                                       imgUrl: newslist[index].urlToImage ?? "",
                                       title: newslist[index].title ?? "",
-                                      desc: newslist[index].description ?? "",
+                                      //desc: newslist[index].description ?? "",
                                       content: newslist[index].content ?? "",
                                       posturl: newslist[index].articleUrl ?? "",
-                                    ).p8(),
-                                  ).p2();
+                                    ),
+                                  );
                                 }),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
+          ),
         ),
 
         ///category page
