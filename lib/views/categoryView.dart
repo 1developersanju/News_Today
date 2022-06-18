@@ -30,62 +30,64 @@ class _CategoryListState extends State<CategoryList> {
     final data = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
-      body: DoubleBackToCloseApp(
-        snackBar: const SnackBar(
-          content: Text('Tap back again to leave'),
-        ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Card(
-              color: Colors.cyan.shade300,
-              elevation: 20,
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    /// Categories
-                    Column(children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          "International"
-                              .text
-                              .yellow400
-                              .size(data.size.height * .03)
-                              .makeCentered(),
-                          "News"
-                              .text
-                              .size(data.size.height * .03)
-                              .white
-                              .makeCentered(),
-                        ],
+      body: SafeArea(
+              child: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            content: Text('Tap back again to leave'),
+          ),
+          child: SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Card(
+                color: Colors.cyan.shade300,
+                elevation: 20,
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      /// Categories
+                      Column(children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            "International"
+                                .text
+                                .yellow400
+                                .size(data.size.height * .03)
+                                .makeCentered(),
+                            "News"
+                                .text
+                                .size(data.size.height * .03)
+                                .white
+                                .makeCentered(),
+                          ],
+                        ),
+                        "Categories"
+                            .text
+                            .size(data.size.height * .02)
+                            .white
+                            .makeCentered(),
+                      ]),
+                      Container(
+                        padding: EdgeInsets.only(top: 5, bottom: 80),
+                        height: data.size.height,
+                        child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithMaxCrossAxisExtent(
+                                    maxCrossAxisExtent: 300,
+                                    childAspectRatio: 5 / 3,
+                                    crossAxisSpacing: 2,
+                                    mainAxisSpacing: 2),
+                            addAutomaticKeepAlives: false,
+                            itemCount: categories.length,
+                            itemBuilder: (context, index) {
+                              return CategoryCard(
+                                imageAssetUrl: categories[index].imageAssetUrl,
+                                categoryName: categories[index].categorieName,
+                              );
+                            }),
                       ),
-                      "Categories"
-                          .text
-                          .size(data.size.height * .02)
-                          .white
-                          .makeCentered(),
-                    ]),
-                    Container(
-                      padding: EdgeInsets.only(top: 5, bottom: 80),
-                      height: data.size.height,
-                      child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 300,
-                                  childAspectRatio: 5 / 3,
-                                  crossAxisSpacing: 2,
-                                  mainAxisSpacing: 2),
-                          addAutomaticKeepAlives: false,
-                          itemCount: categories.length,
-                          itemBuilder: (context, index) {
-                            return CategoryCard(
-                              imageAssetUrl: categories[index].imageAssetUrl,
-                              categoryName: categories[index].categorieName,
-                            );
-                          }),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

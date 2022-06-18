@@ -124,11 +124,13 @@ class _HomeState extends State<Home> {
 
         ///category page
 
-        drawer: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Drawer(
-            elevation: 500,
-            child: CategoryList(),
+        drawer: SafeArea(
+                  child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Drawer(
+              elevation: 500,
+              child: CategoryList(),
+            ),
           ),
         ));
   }

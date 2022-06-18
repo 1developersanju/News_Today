@@ -10,7 +10,8 @@ class NewsForCategory_outside_india {
     String url =
         "http://newsapi.org/v2/top-headlines?country=us&everything?q=tesla&domains=twitter&sortBy=publishedAt&popularity&language=en&category=$category&apiKey=${apiKey}";
 
-    var response = await http.get(url);
+    var response =await http.get(Uri.parse(url));
+
 
     var jsonData = jsonDecode(response.body);
 

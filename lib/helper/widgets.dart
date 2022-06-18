@@ -1,7 +1,13 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:news_app_api/views/article_view.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 // import 'package:share/share.dart';
 // import 'package:path_provider/path_provider.dart';
 // import 'package:http/http.dart';
@@ -36,6 +42,7 @@ class NewsTile extends StatefulWidget {
 }
 
 class _NewsTileState extends State<NewsTile> {
+  final controller = ScreenshotController();
   @override
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
@@ -73,46 +80,50 @@ class _NewsTileState extends State<NewsTile> {
                       Navigator.of(context).push(MaterialPageRoute<void>(
                           builder: (BuildContext context) {
                         final data = MediaQuery.of(context);
-                        return Scaffold(
-                          appBar: AppBar(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                "News"
-                                    .text
-                                    .size(data.size.width * .05)
-                                    .makeCentered(),
-                                "Today"
-                                    .text
-                                    .size(data.size.width * .06)
-                                    .yellow400
-                                    .makeCentered(),
-                              ],
-                            ),
-                            actions: <Widget>[
-                              Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.black,
-                                  ))
-                            ],
-                            backgroundColor: Colors.black,
-                            elevation: 0.0,
-                          ),
-                          //backgroundColor: Colors.black,
-                          body: Container(
-                            color: Colors.black,
-                            alignment: Alignment.center,
-                            child: PinchZoomImage(
-                              image: Image.network(
-                                widget.imgUrl,
-                                height: data.size.height * .40,
-                                width: data.size.width,
-                                fit: BoxFit.fill,
+                        return Screenshot(
+                          controller: controller,
+                          child: Scaffold(
+                            appBar: AppBar(
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  "News"
+                                      .text
+                                      .size(data.size.width * .05)
+                                      .makeCentered(),
+                                  "Today"
+                                      .text
+                                      .size(data.size.width * .06)
+                                      .yellow400
+                                      .makeCentered(),
+                                ],
                               ),
-                              zoomedBackgroundColor: Colors.black,
-                              hideStatusBarWhileZooming: false,
+                              actions: <Widget>[
+                                Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 16),
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.black,
+                                    ))
+                              ],
+                              backgroundColor: Colors.black,
+                              elevation: 0.0,
+                            ),
+                            //backgroundColor: Colors.black,
+                            body: Container(
+                              color: Colors.black,
+                              alignment: Alignment.center,
+                              child: PinchZoomImage(
+                                image: Image.network(
+                                  widget.imgUrl,
+                                  height: data.size.height * .40,
+                                  width: data.size.width,
+                                  fit: BoxFit.fill,
+                                ),
+                                zoomedBackgroundColor: Colors.black,
+                                hideStatusBarWhileZooming: false,
+                              ),
                             ),
                           ),
                         );
@@ -211,8 +222,11 @@ class _NewsTileState extends State<NewsTile> {
                         Align(
                             alignment: Alignment.bottomLeft,
                             child: GestureDetector(
-                              onTap: () {
-                                // print("share article");
+                              onTap: () async {
+//                                print("${widget.posturl}");
+                                final image = await controller.capture();
+                                if (image == null) return;
+                                await saveImage(image);
                               },
                               child: Container(
                                 width: data.size.width / 3,
@@ -245,5 +259,16 @@ class _NewsTileState extends State<NewsTile> {
             ),
           )),
     );
+  }
+
+  Future<String> saveImage(Uint8List bytes) async {
+    await [Permission.storage].request();
+    final time = DateTime.now()
+        .toIso8601String()
+        .replaceAll(".", "_")
+        .replaceAll(":", "_");
+    final name = 'News_Today_$time';
+    final result = await ImageGallerySaver.saveImage(bytes, name: name);
+    return result['filePath'];
   }
 }
